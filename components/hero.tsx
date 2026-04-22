@@ -155,7 +155,7 @@ export function Hero() {
               <div className="relative rounded-full p-[2px] bg-gradient-to-br from-primary/70 via-primary/30 to-transparent">
                 <div className="rounded-full overflow-hidden w-52 h-52 md:w-60 md:h-60 bg-muted">
                   <Image
-                    src="/avatar.jpeg"
+                    src="/avatar.png"
                     alt="Tejashwar Reddy Katika"
                     width={240}
                     height={240}
