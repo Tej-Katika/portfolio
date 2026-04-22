@@ -4,51 +4,48 @@ import { SectionWrapper, SectionLabel } from "@/components/section-wrapper";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 
-const skillGroups = [
+const bentoItems = [
   {
     category: "Languages",
     skills: ["Python", "TypeScript", "JavaScript", "Java", "Go", "SQL"],
-  },
-  {
-    category: "Frontend",
-    skills: ["React", "Next.js", "Vite", "Tailwind CSS", "HTML/CSS"],
-  },
-  {
-    category: "Backend",
-    skills: ["Spring Boot", "Node.js", "REST APIs", "AWS Lambda", "Serverless"],
-  },
-  {
-    category: "Cloud & Infra",
-    skills: [
-      "AWS (SageMaker, Glue, S3, CDK)",
-      "Lambda",
-      "API Gateway",
-      "Step Functions",
-      "EventBridge",
-      "Amplify",
-      "Vercel",
-    ],
+    span: "md:col-span-2",
+    accent: true,
+    description: "Polyglot across the full stack",
   },
   {
     category: "AI / ML",
-    skills: [
-      "Scikit-Learn",
-      "Pandas",
-      "Amazon SageMaker",
-      "Claude AI",
-      "Forecasting Models",
-    ],
+    skills: ["Scikit-Learn", "Pandas", "SageMaker", "Claude AI", "Forecasting"],
+    span: "md:col-span-1",
+    accent: false,
+    description: "From data pipelines to inference",
+  },
+  {
+    category: "Frontend",
+    skills: ["React", "Next.js", "Vite", "Tailwind CSS"],
+    span: "md:col-span-1",
+    accent: false,
+    description: "Interfaces that feel alive",
+  },
+  {
+    category: "Backend",
+    skills: ["Spring Boot", "Node.js", "REST APIs", "Serverless"],
+    span: "md:col-span-1",
+    accent: false,
+    description: "APIs built for scale",
   },
   {
     category: "DevOps & Tools",
-    skills: [
-      "GitHub Actions",
-      "Docker",
-      "Kubernetes",
-      "Git",
-      "CI/CD",
-      "AWS CDK",
-    ],
+    skills: ["GitHub Actions", "Docker", "Kubernetes", "AWS CDK", "CI/CD"],
+    span: "md:col-span-1",
+    accent: false,
+    description: "Ship fast, break nothing",
+  },
+  {
+    category: "Cloud & AWS",
+    skills: ["Lambda", "SageMaker", "S3", "API Gateway", "Glue", "Step Functions", "Amplify", "Vercel"],
+    span: "md:col-span-2",
+    accent: true,
+    description: "AWS Certified Solutions Architect · Associate",
   },
 ];
 
@@ -61,25 +58,39 @@ export function Skills() {
         Tools of the trade
       </h2>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {skillGroups.map((group, groupIdx) => (
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {bentoItems.map((item, i) => (
           <motion.div
-            key={group.category}
+            key={item.category}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: groupIdx * 0.07 }}
-            className="gradient-border rounded-xl p-5 bg-card"
+            transition={{ duration: 0.4, delay: i * 0.06 }}
+            className={`relative gradient-border rounded-2xl p-6 bg-card overflow-hidden group hover:bg-accent/20 transition-colors duration-300 ${item.span}`}
           >
-            <p className="text-xs font-mono font-medium text-primary uppercase tracking-[0.15em] mb-4">
-              {group.category}
+            {/* Decorative background label */}
+            <span className="absolute -bottom-3 -right-2 text-7xl font-black text-foreground/[0.03] select-none pointer-events-none font-mono uppercase leading-none">
+              {item.category.split(" ")[0]}
+            </span>
+
+            {/* Accent glow for featured cells */}
+            {item.accent && (
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+            )}
+
+            <p className="text-xs font-mono font-medium text-primary uppercase tracking-[0.18em] mb-1">
+              {item.category}
             </p>
+            <p className="text-xs text-muted-foreground mb-4 font-mono">
+              {item.description}
+            </p>
+
             <div className="flex flex-wrap gap-2">
-              {group.skills.map((skill) => (
+              {item.skills.map((skill) => (
                 <Badge
                   key={skill}
                   variant="secondary"
-                  className="text-xs font-normal rounded-md"
+                  className="text-xs font-normal rounded-lg"
                 >
                   {skill}
                 </Badge>
