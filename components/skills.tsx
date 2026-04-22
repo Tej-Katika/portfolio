@@ -52,7 +52,7 @@ const bentoItems = [
 export function Skills() {
   return (
     <SectionWrapper id="skills" className="max-w-5xl mx-auto px-6 py-24">
-      <SectionLabel>Skills</SectionLabel>
+      <SectionLabel index="02">Skills</SectionLabel>
 
       <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-10">
         Tools of the trade

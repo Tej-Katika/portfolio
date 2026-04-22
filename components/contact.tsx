@@ -35,7 +35,7 @@ export function Contact() {
 
   return (
     <SectionWrapper id="contact" className="max-w-5xl mx-auto px-6 py-24">
-      <SectionLabel>Contact</SectionLabel>
+      <SectionLabel index="07">Contact</SectionLabel>
 
       <div className="max-w-2xl">
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">

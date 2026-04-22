@@ -47,8 +47,8 @@ export function AiHorizon() {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <p className="text-xs font-mono text-primary uppercase tracking-[0.2em] mb-6">
-            Perspective
+          <p className="text-xs font-mono text-primary/60 uppercase tracking-[0.2em] mb-6">
+            [05] ──── Perspective
           </p>
 
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">

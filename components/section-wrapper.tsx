@@ -19,10 +19,10 @@ export function SectionWrapper({
   return (
     <motion.section
       id={id}
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, ease: "easeOut", delay }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.55, ease: "easeOut", delay }}
       className={className}
     >
       {children}
@@ -30,13 +30,21 @@ export function SectionWrapper({
   );
 }
 
-export function SectionLabel({ children }: { children: ReactNode }) {
+interface SectionLabelProps {
+  children: ReactNode;
+  index: string;
+}
+
+export function SectionLabel({ children, index }: SectionLabelProps) {
   return (
-    <div className="flex items-center gap-3 mb-10">
-      <span className="text-xs font-mono font-medium tracking-[0.2em] uppercase text-primary opacity-80">
+    <div className="flex items-center gap-4 mb-12">
+      <span className="font-mono text-[11px] text-primary/50 tabular-nums">
+        [{index}]
+      </span>
+      <span className="font-mono text-[11px] font-medium tracking-[0.22em] uppercase text-muted-foreground">
         {children}
       </span>
-      <div className="flex-1 h-px bg-border" />
+      <div className="flex-1 h-px bg-gradient-to-r from-border via-border/50 to-transparent" />
     </div>
   );
 }

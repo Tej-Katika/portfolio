@@ -6,7 +6,7 @@ import { GraduationCap, Award } from "lucide-react";
 export function Education() {
   return (
     <SectionWrapper id="education" className="max-w-5xl mx-auto px-6 py-24">
-      <SectionLabel>Education & Certifications</SectionLabel>
+      <SectionLabel index="06">Education & Certifications</SectionLabel>
 
       <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-10">
         Academic background

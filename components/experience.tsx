@@ -32,7 +32,7 @@ const experiences = [
 export function Experience() {
   return (
     <SectionWrapper id="experience" className="max-w-5xl mx-auto px-6 py-24">
-      <SectionLabel>Experience</SectionLabel>
+      <SectionLabel index="03">Experience</SectionLabel>
 
       <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-12">
         Where I&apos;ve worked
