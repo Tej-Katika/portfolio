@@ -19,7 +19,7 @@ const item: Variants = {
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
 
       {/* Animated dot grid */}
       <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
@@ -46,19 +46,22 @@ export function Hero() {
             animate="show"
             className="flex-1 min-w-0"
           >
-            {/* Status row */}
-            <motion.div variants={item} className="flex flex-wrap items-center gap-2 mb-8">
-              <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground border border-border rounded-full px-3 py-1.5">
-                <MapPin className="h-3 w-3 text-primary" />
-                Dallas, TX
-              </span>
-              <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-3 py-1.5">
+            {/* Signals strip — operator-style spec row */}
+            <motion.div variants={item} className="flex items-center gap-4 mb-8 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5 text-emerald-400">
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
                 </span>
-                Open to Opportunities
+                <span className="text-emerald-400/90">available</span>
               </span>
+              <span className="text-border">·</span>
+              <span className="inline-flex items-center gap-1.5">
+                <MapPin className="h-3 w-3 text-primary/70" />
+                <span>dallas, tx</span>
+              </span>
+              <span className="text-border">·</span>
+              <span className="hidden sm:inline">focus <span className="text-foreground/80">ai · orchestration</span></span>
             </motion.div>
 
             {/* Name — massive editorial typography */}

@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
-import { Marquee } from "@/components/marquee";
+import { NowSection } from "@/components/now-section";
 import { About } from "@/components/about";
 import { Skills } from "@/components/skills";
 import { Experience } from "@/components/experience";
@@ -10,6 +10,7 @@ import { Education } from "@/components/education";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
 import { PageWrapper } from "@/components/page-wrapper";
+import { BottomStatusBar } from "@/components/bottom-status-bar";
 
 export default function Home() {
   return (
@@ -17,7 +18,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Marquee />
+        <NowSection />
         <About />
         <Skills />
         <Experience />
@@ -27,6 +28,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <BottomStatusBar />
     </PageWrapper>
   );
 }

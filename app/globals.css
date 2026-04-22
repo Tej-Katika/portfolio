@@ -68,6 +68,10 @@
   --border: oklch(1 0 0 / 7%);
   --input: oklch(1 0 0 / 9%);
   --ring: oklch(0.67 0.23 272);
+  /* Secondary accent — electric green for "live" states */
+  --live: oklch(0.78 0.22 145);
+  --live-bg: oklch(0.78 0.22 145 / 0.10);
+  --live-border: oklch(0.78 0.22 145 / 0.25);
 }
 
 /* GPU-accelerated animations only */

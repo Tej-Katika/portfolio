@@ -1,104 +1,175 @@
 "use client";
 
 import { SectionWrapper, SectionLabel } from "@/components/section-wrapper";
-import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 
-const bentoItems = [
+type Row = {
+  domain: string;
+  stack: string[];
+  years: number; // 1..5 fill level
+  note: string;
+};
+
+const matrix: { group: string; rows: Row[] }[] = [
   {
-    category: "Languages",
-    skills: ["Python", "TypeScript", "JavaScript", "Java", "Go", "SQL"],
-    span: "md:col-span-2",
-    accent: true,
-    description: "Polyglot across the full stack",
+    group: "Systems",
+    rows: [
+      {
+        domain: "Distributed Orchestration",
+        stack: ["Kubernetes", "Karmada", "Go"],
+        years: 3,
+        note: "multi-cloud control planes",
+      },
+      {
+        domain: "Cloud Architecture",
+        stack: ["AWS", "Lambda", "CDK", "API Gateway"],
+        years: 4,
+        note: "AWS SA · Associate",
+      },
+      {
+        domain: "Backend Engineering",
+        stack: ["Spring Boot", "Node.js", "REST", "Serverless"],
+        years: 4,
+        note: "contract-first services",
+      },
+    ],
   },
   {
-    category: "AI / ML",
-    skills: ["Scikit-Learn", "Pandas", "SageMaker", "Claude AI", "Forecasting"],
-    span: "md:col-span-1",
-    accent: false,
-    description: "From data pipelines to inference",
+    group: "Intelligence",
+    rows: [
+      {
+        domain: "AI / ML Engineering",
+        stack: ["SageMaker", "Claude API", "scikit-learn", "Pandas"],
+        years: 3,
+        note: "forecasting, agents, pipelines",
+      },
+      {
+        domain: "Data Platforms",
+        stack: ["Glue", "Step Functions", "S3", "SQL"],
+        years: 3,
+        note: "ingest → transform → infer",
+      },
+    ],
   },
   {
-    category: "Frontend",
-    skills: ["React", "Next.js", "Vite", "Tailwind CSS"],
-    span: "md:col-span-1",
-    accent: false,
-    description: "Interfaces that feel alive",
-  },
-  {
-    category: "Backend",
-    skills: ["Spring Boot", "Node.js", "REST APIs", "Serverless"],
-    span: "md:col-span-1",
-    accent: false,
-    description: "APIs built for scale",
-  },
-  {
-    category: "DevOps & Tools",
-    skills: ["GitHub Actions", "Docker", "Kubernetes", "AWS CDK", "CI/CD"],
-    span: "md:col-span-1",
-    accent: false,
-    description: "Ship fast, break nothing",
-  },
-  {
-    category: "Cloud & AWS",
-    skills: ["Lambda", "SageMaker", "S3", "API Gateway", "Glue", "Step Functions", "Amplify", "Vercel"],
-    span: "md:col-span-2",
-    accent: true,
-    description: "AWS Certified Solutions Architect · Associate",
+    group: "Interface",
+    rows: [
+      {
+        domain: "Frontend",
+        stack: ["React", "Next.js", "TypeScript", "Tailwind"],
+        years: 4,
+        note: "app-router, motion, a11y",
+      },
+      {
+        domain: "DX & Delivery",
+        stack: ["Docker", "GitHub Actions", "Vercel", "CI/CD"],
+        years: 4,
+        note: "ship fast, ship safe",
+      },
+    ],
   },
 ];
+
+function ExperienceDots({ level }: { level: number }) {
+  return (
+    <span className="inline-flex gap-[3px] items-center" aria-label={`${level} of 5 experience`}>
+      {[1, 2, 3, 4, 5].map((i) => (
+        <span
+          key={i}
+          className={`h-1.5 w-1.5 rounded-full ${
+            i <= level ? "bg-primary" : "bg-border"
+          }`}
+        />
+      ))}
+    </span>
+  );
+}
 
 export function Skills() {
   return (
     <SectionWrapper id="skills" className="max-w-5xl mx-auto px-6 py-24">
-      <SectionLabel index="02">Skills</SectionLabel>
+      <SectionLabel index="02">Skill Matrix</SectionLabel>
 
-      <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-10">
-        Tools of the trade
-      </h2>
+      <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
+        <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-[1]">
+          The <span className="gradient-text">stack</span>, without the buzzwords.
+        </h2>
+        <p className="text-xs font-mono text-muted-foreground max-w-xs">
+          Depth marked with dots · hover a row for context.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {bentoItems.map((item, i) => (
+      {/* Matrix */}
+      <div className="border-t border-border/70">
+        {matrix.map((group, gi) => (
           <motion.div
-            key={item.category}
-            initial={{ opacity: 0, y: 16 }}
+            key={group.group}
+            initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: i * 0.06 }}
-            className={`relative gradient-border rounded-2xl p-6 bg-card overflow-hidden group hover:bg-accent/20 transition-colors duration-300 ${item.span}`}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.45, delay: gi * 0.08 }}
           >
-            {/* Decorative background label */}
-            <span className="absolute -bottom-3 -right-2 text-7xl font-black text-foreground/[0.03] select-none pointer-events-none font-mono uppercase leading-none">
-              {item.category.split(" ")[0]}
-            </span>
-
-            {/* Accent glow for featured cells */}
-            {item.accent && (
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-            )}
-
-            <p className="text-xs font-mono font-medium text-primary uppercase tracking-[0.18em] mb-1">
-              {item.category}
-            </p>
-            <p className="text-xs text-muted-foreground mb-4 font-mono">
-              {item.description}
-            </p>
-
-            <div className="flex flex-wrap gap-2">
-              {item.skills.map((skill) => (
-                <Badge
-                  key={skill}
-                  variant="secondary"
-                  className="text-xs font-normal rounded-lg"
-                >
-                  {skill}
-                </Badge>
-              ))}
+            {/* Group header */}
+            <div className="grid grid-cols-[auto_1fr] items-baseline gap-6 py-5 border-b border-border/40">
+              <span className="font-mono text-[10px] text-primary/60 uppercase tracking-[0.22em] tabular-nums w-16">
+                0{gi + 1}
+              </span>
+              <h3 className="font-mono text-xs uppercase tracking-[0.22em] text-foreground/90">
+                {group.group}
+              </h3>
             </div>
+
+            {/* Rows */}
+            {group.rows.map((row) => (
+              <div
+                key={row.domain}
+                className="group grid grid-cols-1 md:grid-cols-[1fr_auto] gap-2 md:gap-8 py-5 border-b border-border/40 hover:bg-accent/20 transition-colors px-2 -mx-2 rounded-sm"
+              >
+                {/* Left: domain + stack */}
+                <div className="min-w-0">
+                  <div className="flex items-baseline gap-3 mb-1.5">
+                    <h4 className="text-base md:text-lg font-semibold tracking-tight text-foreground group-hover:text-primary transition-colors">
+                      {row.domain}
+                    </h4>
+                    <span className="font-mono text-[10px] text-muted-foreground/60 hidden md:inline">
+                      — {row.note}
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-x-3 gap-y-1">
+                    {row.stack.map((s, i) => (
+                      <span
+                        key={s}
+                        className="font-mono text-[11px] text-muted-foreground"
+                      >
+                        {s}
+                        {i < row.stack.length - 1 && (
+                          <span className="text-border/70 ml-3">/</span>
+                        )}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="font-mono text-[10px] text-muted-foreground/60 mt-1.5 md:hidden">
+                    — {row.note}
+                  </p>
+                </div>
+
+                {/* Right: experience dots */}
+                <div className="flex items-center gap-3 md:justify-end">
+                  <ExperienceDots level={row.years} />
+                  <span className="font-mono text-[10px] text-muted-foreground tabular-nums w-10 text-right">
+                    {row.years === 5 ? "5+ yrs" : `${row.years}+ yrs`}
+                  </span>
+                </div>
+              </div>
+            ))}
           </motion.div>
         ))}
       </div>
+
+      {/* Footnote */}
+      <p className="mt-8 font-mono text-[10px] text-muted-foreground/60 uppercase tracking-[0.2em]">
+        ★ AWS Certified Solutions Architect — Associate · active CNCF contributor
+      </p>
     </SectionWrapper>
   );
 }

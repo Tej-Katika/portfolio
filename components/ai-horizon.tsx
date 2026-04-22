@@ -22,7 +22,7 @@ const principles = [
 
 export function AiHorizon() {
   return (
-    <section className="relative py-32 overflow-hidden">
+    <section id="ai-horizon" className="relative py-32 overflow-hidden">
       {/* Dark atmospheric background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/[0.04] to-background pointer-events-none" />
 
@@ -45,11 +45,17 @@ export function AiHorizon() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-20"
+          className="mb-16"
         >
-          <p className="text-xs font-mono text-primary/60 uppercase tracking-[0.2em] mb-6">
-            [05] ──── Perspective
-          </p>
+          <div className="flex items-center gap-4 mb-8">
+            <span className="font-mono text-[11px] text-primary/50 tabular-nums">
+              [05]
+            </span>
+            <span className="font-mono text-[11px] font-medium tracking-[0.22em] uppercase text-muted-foreground">
+              Perspective
+            </span>
+            <div className="flex-1 h-px bg-gradient-to-r from-border via-border/50 to-transparent" />
+          </div>
 
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-[1] max-w-2xl">
@@ -59,13 +65,21 @@ export function AiHorizon() {
               <span className="gradient-text">infrastructure.</span>
             </h2>
             <p className="text-sm text-muted-foreground max-w-xs leading-relaxed md:text-right">
-              Software engineering is undergoing its most profound shift since the cloud. Here's how I think about building for what comes next.
+              Software engineering is undergoing its most profound shift since the cloud. Here&apos;s how I think about building for what comes next.
             </p>
           </div>
         </motion.div>
 
-        {/* Divider */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-border to-transparent mb-20" />
+        {/* Spec readout strip */}
+        <div className="flex items-center flex-wrap gap-x-6 gap-y-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70 py-4 border-y border-border/50 mb-16">
+          <span className="text-primary/60">/thesis</span>
+          <span className="text-border">·</span>
+          <span>three principles</span>
+          <span className="text-border">·</span>
+          <span>derived from practice</span>
+          <span className="text-border">·</span>
+          <span className="text-foreground/60">updated 2026.04</span>
+        </div>
 
         {/* Principles */}
         <div className="flex flex-col gap-0">
@@ -76,18 +90,21 @@ export function AiHorizon() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group grid md:grid-cols-[120px_1fr] gap-6 md:gap-12 py-10 border-b border-border/50 last:border-0 hover:border-primary/20 transition-colors duration-500"
+              className="group grid md:grid-cols-[140px_1fr] gap-6 md:gap-12 py-12 border-b border-border/50 last:border-0 hover:border-primary/20 transition-colors duration-500"
             >
-              {/* Number */}
-              <div className="flex md:flex-col md:items-start gap-3">
-                <span className="font-mono text-5xl md:text-7xl font-black text-foreground/[0.06] leading-none group-hover:text-primary/10 transition-colors duration-500 select-none">
+              {/* Number column */}
+              <div className="flex md:flex-col md:items-start gap-3 md:sticky md:top-24 md:self-start">
+                <span className="font-mono text-[11px] text-primary/60 tracking-[0.22em] uppercase">
+                  principle {p.number}
+                </span>
+                <span className="font-mono text-6xl md:text-8xl font-black text-foreground/[0.08] leading-none group-hover:text-primary/20 transition-colors duration-500 select-none tabular-nums">
                   {p.number}
                 </span>
               </div>
 
               {/* Content */}
-              <div className="md:pt-2">
-                <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-4 group-hover:text-primary transition-colors duration-300">
+              <div className="md:pt-1">
+                <h3 className="text-xl md:text-3xl font-bold tracking-tight mb-5 leading-tight group-hover:text-primary transition-colors duration-300">
                   {p.title}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed text-sm md:text-base max-w-2xl">

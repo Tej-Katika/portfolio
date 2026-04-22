@@ -7,48 +7,95 @@ import { motion } from "framer-motion";
 import { GithubIcon } from "@/components/icons";
 import { ArrowRight } from "lucide-react";
 
-const projects = [
+type Status = "active" | "deployed" | "open-source" | "archived";
+
+const STATUS_META: Record<Status, { label: string; dot: string; text: string; bg: string; border: string }> = {
+  active: {
+    label: "active",
+    dot: "bg-emerald-500",
+    text: "text-emerald-400",
+    bg: "bg-emerald-500/10",
+    border: "border-emerald-500/20",
+  },
+  deployed: {
+    label: "deployed",
+    dot: "bg-primary",
+    text: "text-primary",
+    bg: "bg-primary/10",
+    border: "border-primary/20",
+  },
+  "open-source": {
+    label: "open source",
+    dot: "bg-violet-400",
+    text: "text-violet-300",
+    bg: "bg-violet-500/10",
+    border: "border-violet-500/20",
+  },
+  archived: {
+    label: "archived",
+    dot: "bg-muted-foreground",
+    text: "text-muted-foreground",
+    bg: "bg-muted/40",
+    border: "border-border",
+  },
+};
+
+const projects: {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  tags: string[];
+  github: string;
+  status: Status[];
+  accent: string;
+  accentBorder: string;
+}[] = [
   {
+    id: "01",
     title: "Karmada",
     subtitle: "Open Source · CNCF",
     description:
       "Active contributor to Karmada — the CNCF multi-cloud, multi-cluster Kubernetes orchestration project. Working on control-plane features that manage workload distribution across cloud boundaries at scale.",
     tags: ["Go", "Kubernetes", "Multi-Cloud", "CNCF"],
     github: "https://github.com/karmada-io/karmada",
-    active: true,
+    status: ["active", "open-source"],
     accent: "from-emerald-500/20 to-emerald-500/5",
     accentBorder: "border-emerald-500/20",
   },
   {
+    id: "02",
     title: "Predictive Inventory System",
     subtitle: "Cloud · ML · Full-Stack",
     description:
       "Cloud-native demand forecasting platform with real-time sales ingestion via AWS API Gateway + Lambda, ETL through Glue, ML predictions via SageMaker, and a React + Amplify dashboard.",
     tags: ["Python", "AWS SageMaker", "Lambda", "React", "CDK"],
     github: "https://github.com/Tej-Katika/predictive-inventory-system",
-    active: false,
+    status: ["deployed"],
     accent: "from-primary/15 to-primary/5",
     accentBorder: "border-primary/15",
   },
   {
+    id: "03",
     title: "XL-Forge",
     subtitle: "AI · Web App",
     description:
       "Browser-based Excel editor with AI-powered natural language transforms via Claude API. Supports .xlsx/.csv, full undo/redo, multi-sheet navigation, and WCAG 2.1 AA accessibility compliance.",
     tags: ["React", "Vite", "Claude AI", "Vercel", "JavaScript"],
     github: "https://github.com/Tej-Katika/xl-forge",
-    active: false,
+    status: ["deployed", "open-source"],
     accent: "from-violet-500/15 to-violet-500/5",
     accentBorder: "border-violet-500/15",
   },
   {
+    id: "04",
     title: "JP Morgan Midas Core",
     subtitle: "FinTech · Java",
     description:
       "J.P. Morgan Advanced Software Engineering virtual experience — implemented core banking transaction logic, applied financial data handling patterns, and enterprise-grade Java architecture.",
     tags: ["Java", "Spring Boot", "Financial Systems"],
     github: "https://github.com/Tej-Katika/midas-core",
-    active: false,
+    status: ["archived"],
     accent: "from-amber-500/15 to-amber-500/5",
     accentBorder: "border-amber-500/15",
   },
@@ -115,24 +162,42 @@ export function Projects() {
             />
 
             <div className="relative flex flex-col h-full">
+              {/* Top meta row — project ID + status badges */}
+              <div className="flex items-center justify-between mb-3">
+                <span className="font-mono text-[10px] text-muted-foreground/60 tabular-nums tracking-wider">
+                  PROJ · {project.id}
+                </span>
+                <div className="flex items-center gap-1.5">
+                  {project.status.map((s) => {
+                    const meta = STATUS_META[s];
+                    const isActive = s === "active";
+                    return (
+                      <span
+                        key={s}
+                        className={`inline-flex items-center gap-1 text-[9px] font-mono uppercase tracking-wider rounded-full px-2 py-0.5 border ${meta.bg} ${meta.border} ${meta.text}`}
+                      >
+                        {isActive ? (
+                          <span className="relative flex h-1 w-1">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                            <span className={`relative inline-flex rounded-full h-1 w-1 ${meta.dot}`} />
+                          </span>
+                        ) : (
+                          <span className={`h-1 w-1 rounded-full ${meta.dot}`} />
+                        )}
+                        {meta.label}
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
+
               {/* Header */}
               <div className="flex items-start justify-between mb-2">
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-base font-bold text-foreground">
-                      {project.title}
-                    </h3>
-                    {project.active && (
-                      <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2 py-0.5">
-                        <span className="relative flex h-1 w-1">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                          <span className="relative inline-flex rounded-full h-1 w-1 bg-emerald-500" />
-                        </span>
-                        Live
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">
+                <div className="min-w-0">
+                  <h3 className="text-base font-bold text-foreground leading-tight">
+                    {project.title}
+                  </h3>
+                  <p className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider mt-1">
                     {project.subtitle}
                   </p>
                 </div>
