@@ -50,7 +50,7 @@
   --radius: 0.625rem;
 }
 
-/* Dark theme — deeper, more vivid */
+/* Dark theme */
 .dark {
   --background: oklch(0.07 0.008 272);
   --foreground: oklch(0.96 0 0);
@@ -70,14 +70,10 @@
   --ring: oklch(0.67 0.23 272);
 }
 
+/* GPU-accelerated animations only */
 @keyframes marquee {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-@keyframes dot-drift {
-  0%   { background-position: 0px 0px; }
-  100% { background-position: 32px 32px; }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 @keyframes blink {
@@ -88,32 +84,29 @@
 @layer base {
   * { @apply border-border; }
 
-  @media (pointer: fine) {
-    * { cursor: none !important; }
-  }
-
   html { scroll-behavior: smooth; }
 
   body {
     @apply bg-background text-foreground;
-    /* subtle grain */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+    /* No SVG filter — was causing full-page repaints on scroll */
   }
 }
 
 @layer utilities {
+  /* transform-only — fully GPU accelerated */
   .animate-marquee {
     animation: marquee 30s linear infinite;
+    will-change: transform;
   }
 
   .animate-blink {
     animation: blink 1s step-end infinite;
   }
 
+  /* Static dot grid — no background-position animation (non-GPU) */
   .dot-grid {
     background-image: radial-gradient(circle, oklch(0.67 0.23 272 / 0.18) 1px, transparent 1px);
     background-size: 32px 32px;
-    animation: dot-drift 12s linear infinite;
   }
 
   .gradient-text {
@@ -139,11 +132,7 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  .scrollbar-none::-webkit-scrollbar {
-    display: none;
-  }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
 
-  .clip-reveal {
-    clip-path: inset(0 100% 0 0);
-  }
+  .clip-reveal { clip-path: inset(0 100% 0 0); }
 }

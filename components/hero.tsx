@@ -24,14 +24,17 @@ export function Hero() {
       {/* Animated dot grid */}
       <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
 
-      {/* Radial vignette overlay */}
-      <div className="absolute inset-0 bg-radial-[ellipse_80%_60%_at_50%_50%] from-transparent to-background/80 pointer-events-none" />
-
-      {/* Large ambient glow orbs */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/8 blur-[100px]" />
-        <div className="absolute top-1/2 -right-20 w-[350px] h-[350px] rounded-full bg-primary/6 blur-[80px]" />
-      </div>
+      {/* Ambient gradients — radial-gradient only, no filter:blur (GPU friendly) */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 700px 500px at 70% -5%, oklch(0.67 0.23 272 / 0.12) 0%, transparent 70%), " +
+            "radial-gradient(ellipse 500px 400px at 95% 65%, oklch(0.67 0.23 272 / 0.08) 0%, transparent 65%), " +
+            "radial-gradient(ellipse 60% 40% at 50% 50%, transparent 40%, var(--background) 100%)",
+        }}
+      />
 
       <div className="relative max-w-5xl mx-auto px-6 pt-28 pb-16 w-full">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10">
@@ -137,8 +140,14 @@ export function Hero() {
             className="flex justify-center md:justify-end shrink-0"
           >
             <div className="relative">
-              {/* Glow */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 to-primary/5 blur-3xl scale-125 pointer-events-none" />
+              {/* Glow — radial gradient, no filter:blur */}
+              <div
+                className="absolute -inset-8 pointer-events-none"
+                style={{
+                  background:
+                    "radial-gradient(ellipse 100% 100% at 50% 50%, oklch(0.67 0.23 272 / 0.18) 0%, transparent 70%)",
+                }}
+              />
               {/* Outer decorative ring */}
               <div className="absolute -inset-3 rounded-full border border-primary/10 pointer-events-none" />
               <div className="absolute -inset-6 rounded-full border border-primary/5 pointer-events-none" />

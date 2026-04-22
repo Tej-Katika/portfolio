@@ -9,13 +9,11 @@ import { AiHorizon } from "@/components/ai-horizon";
 import { Education } from "@/components/education";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
-import { CustomCursor } from "@/components/cursor";
 import { PageWrapper } from "@/components/page-wrapper";
 
 export default function Home() {
   return (
     <PageWrapper>
-      <CustomCursor />
       <Navbar />
       <main>
         <Hero />
