@@ -34,7 +34,7 @@ const charItem: Variants = {
 
 function AnimatedWord({ word, className = "" }: { word: string; className?: string }) {
   return (
-    <span className={`inline-block overflow-hidden align-bottom ${className}`}>
+    <span className={`inline-block overflow-hidden align-bottom whitespace-nowrap ${className}`}>
       <motion.span
         variants={nameContainer}
         initial="hidden"
@@ -105,14 +105,17 @@ export function Hero() {
               <span className="hidden sm:inline">focus <span className="text-foreground/80">ai · agents · orchestration</span></span>
             </motion.div>
 
-            {/* Name — kinetic editorial treatment */}
+            {/* Name — kinetic editorial treatment, stacked so no word breaks */}
             <motion.div variants={item} className="mb-6">
               <h1 className="font-black tracking-[-0.03em] leading-[0.9] uppercase">
-                <span className="block text-[clamp(3.5rem,10vw,7.5rem)] text-foreground">
+                <span className="block text-[clamp(3rem,9vw,7rem)] text-foreground">
                   <AnimatedWord word="Tejashwar" />
                 </span>
-                <span className="block text-[clamp(3rem,8.5vw,6.5rem)] gradient-text">
-                  <AnimatedWord word="Reddy Katika" />
+                <span className="block text-[clamp(3rem,9vw,7rem)] text-foreground">
+                  <AnimatedWord word="Reddy" />
+                </span>
+                <span className="block text-[clamp(3rem,9vw,7rem)] gradient-text">
+                  <AnimatedWord word="Katika" />
                 </span>
               </h1>
             </motion.div>
