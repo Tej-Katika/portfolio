@@ -7,27 +7,27 @@ const columns = [
     heading: "Building",
     code: "01",
     items: [
-      { primary: "Karmada control-plane contributions", meta: "CNCF · Go" },
-      { primary: "Predictive Inventory System", meta: "AWS · SageMaker" },
-      { primary: "This portfolio — every pixel", meta: "Next.js · Motion" },
+      { primary: "Artha — agentic finance framework", meta: "Java 21 · Claude · arXiv" },
+      { primary: "Gr8Saver — AI deal aggregator", meta: "Next.js · DeepSeek · live" },
+      { primary: "Karmada — CNCF contributions", meta: "Go · multi-cloud" },
     ],
   },
   {
     heading: "Learning",
     code: "02",
     items: [
+      { primary: "Evaluation harnesses for agents", meta: "eval sets, traces, scoring" },
       { primary: "Distributed scheduling internals", meta: "kube-scheduler, Karmada" },
-      { primary: "Vector databases at scale", meta: "pgvector, Pinecone" },
-      { primary: "Systems programming in Rust", meta: "ownership, lifetimes" },
+      { primary: "Vector DBs + ontology retrieval", meta: "pgvector, hybrid search" },
     ],
   },
   {
     heading: "Thinking About",
     code: "03",
     items: [
-      { primary: "Where agentic workflows replace microservices", meta: "architecture" },
-      { primary: "How AI changes the shape of on-call", meta: "reliability" },
-      { primary: "Why orchestration is the next frontier", meta: "infrastructure" },
+      { primary: "Where agents replace microservices", meta: "architecture" },
+      { primary: "Ontologies as context for LLMs", meta: "typed tools beat JSON blobs" },
+      { primary: "Orchestration for AI clouds", meta: "infrastructure" },
     ],
   },
 ];

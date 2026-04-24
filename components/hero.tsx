@@ -9,7 +9,7 @@ import { buttonVariants } from "@/components/ui/button";
 
 const container: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
 };
 
 const item: Variants = {
@@ -17,14 +17,48 @@ const item: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.55 } },
 };
 
+// Character-by-character reveal for display name
+const nameContainer: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.035, delayChildren: 0.35 } },
+};
+
+const charItem: Variants = {
+  hidden: { y: "110%", opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+function AnimatedWord({ word, className = "" }: { word: string; className?: string }) {
+  return (
+    <span className={`inline-block overflow-hidden align-bottom ${className}`}>
+      <motion.span
+        variants={nameContainer}
+        initial="hidden"
+        animate="show"
+        className="inline-block"
+      >
+        {Array.from(word).map((c, i) => (
+          <motion.span key={i} variants={charItem} className="inline-block">
+            {c === " " ? " " : c}
+          </motion.span>
+        ))}
+      </motion.span>
+    </span>
+  );
+}
+
 export function Hero() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden texture-noise">
 
-      {/* Animated dot grid */}
+      {/* Dot grid */}
       <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
 
-      {/* Ambient gradients — radial-gradient only, no filter:blur (GPU friendly) */}
+      {/* Ambient gradients — radial only */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
@@ -36,7 +70,14 @@ export function Hero() {
         }}
       />
 
-      <div className="relative max-w-5xl mx-auto px-6 pt-28 pb-16 w-full">
+      {/* Schematic dimension markers — top-right corner of hero */}
+      <div className="hidden lg:block absolute top-20 right-6 font-mono text-[9px] uppercase tracking-[0.22em] text-muted-foreground/40 text-right leading-relaxed pointer-events-none">
+        <div>rev · 2026.04</div>
+        <div>build · stable</div>
+        <div>layer · execution</div>
+      </div>
+
+      <div className="relative max-w-5xl mx-auto px-6 pt-28 pb-24 w-full">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10">
 
           {/* ── Left: Text ── */}
@@ -46,7 +87,7 @@ export function Hero() {
             animate="show"
             className="flex-1 min-w-0"
           >
-            {/* Signals strip — operator-style spec row */}
+            {/* Signals strip */}
             <motion.div variants={item} className="flex items-center gap-4 mb-8 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               <span className="inline-flex items-center gap-1.5 text-emerald-400">
                 <span className="relative flex h-1.5 w-1.5">
@@ -61,35 +102,47 @@ export function Hero() {
                 <span>dallas, tx</span>
               </span>
               <span className="text-border">·</span>
-              <span className="hidden sm:inline">focus <span className="text-foreground/80">ai · orchestration</span></span>
+              <span className="hidden sm:inline">focus <span className="text-foreground/80">ai · agents · orchestration</span></span>
             </motion.div>
 
-            {/* Name — massive editorial typography */}
+            {/* Name — kinetic editorial treatment */}
             <motion.div variants={item} className="mb-6">
-              <h1 className="font-black tracking-[-0.03em] leading-[0.92] uppercase">
+              <h1 className="font-black tracking-[-0.03em] leading-[0.9] uppercase">
                 <span className="block text-[clamp(3.5rem,10vw,7.5rem)] text-foreground">
-                  Tejashwar
+                  <AnimatedWord word="Tejashwar" />
                 </span>
                 <span className="block text-[clamp(3rem,8.5vw,6.5rem)] gradient-text">
-                  Reddy Katika
+                  <AnimatedWord word="Reddy Katika" />
                 </span>
               </h1>
             </motion.div>
 
-            {/* Separator line */}
+            {/* Separator with schematic tick */}
             <motion.div
               variants={item}
-              className="w-12 h-[2px] bg-primary mb-6 rounded-full"
-            />
+              className="flex items-center gap-3 mb-7"
+            >
+              <div className="w-12 h-[2px] bg-primary rounded-full" />
+              <span className="font-mono text-[10px] text-muted-foreground/60 uppercase tracking-[0.22em]">
+                role · engineer
+              </span>
+            </motion.div>
 
-            {/* Headline */}
+            {/* Headline — updated framing with serif accent */}
             <motion.p
               variants={item}
-              className="text-base md:text-lg text-muted-foreground font-light mb-8 max-w-md leading-relaxed"
+              className="text-base md:text-lg text-muted-foreground font-light mb-8 max-w-lg leading-relaxed"
             >
-              Full-Stack Software & AI Engineer —{" "}
-              building intelligent, cloud-native systems
-              from zero to production.
+              Building{" "}
+              <span className="font-serif-display text-xl md:text-2xl text-foreground/90 normal-case">
+                agentic
+              </span>{" "}
+              systems, cloud-native orchestration,
+              and the{" "}
+              <span className="font-serif-display text-xl md:text-2xl text-foreground/90 normal-case">
+                interfaces
+              </span>{" "}
+              between them.
             </motion.p>
 
             {/* CTA row */}
@@ -143,7 +196,7 @@ export function Hero() {
             className="flex justify-center md:justify-end shrink-0"
           >
             <div className="relative">
-              {/* Glow — radial gradient, no filter:blur */}
+              {/* Glow */}
               <div
                 className="absolute -inset-8 pointer-events-none"
                 style={{
@@ -151,9 +204,10 @@ export function Hero() {
                     "radial-gradient(ellipse 100% 100% at 50% 50%, oklch(0.67 0.23 272 / 0.18) 0%, transparent 70%)",
                 }}
               />
-              {/* Outer decorative ring */}
+              {/* Decorative rings */}
               <div className="absolute -inset-3 rounded-full border border-primary/10 pointer-events-none" />
               <div className="absolute -inset-6 rounded-full border border-primary/5 pointer-events-none" />
+
               {/* Gradient border ring */}
               <div className="relative rounded-full p-[2px] bg-gradient-to-br from-primary/70 via-primary/30 to-transparent">
                 <div className="rounded-full overflow-hidden w-52 h-52 md:w-60 md:h-60 bg-muted">
@@ -168,15 +222,21 @@ export function Hero() {
                 </div>
               </div>
 
+              {/* Schematic annotation — avatar ID */}
+              <div className="hidden md:block absolute -top-4 -right-2 font-mono text-[9px] text-muted-foreground/60 uppercase tracking-[0.2em] text-right leading-tight">
+                <div>node · 01</div>
+                <div className="text-emerald-400/80">status · live</div>
+              </div>
+
               {/* Floating badge — currently building */}
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9, duration: 0.4 }}
+                transition={{ delay: 1.0, duration: 0.4 }}
                 className="absolute -bottom-4 -left-4 gradient-border bg-card rounded-xl px-3 py-2 shadow-lg"
               >
                 <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest mb-0.5">Currently</p>
-                <p className="text-xs font-semibold text-foreground">Contributing to Karmada</p>
+                <p className="text-xs font-semibold text-foreground">Building Artha · Gr8Saver · Karmada</p>
               </motion.div>
             </div>
           </motion.div>

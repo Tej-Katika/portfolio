@@ -5,7 +5,7 @@ import { SectionWrapper, SectionLabel } from "@/components/section-wrapper";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { GithubIcon } from "@/components/icons";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 
 type Status = "active" | "deployed" | "open-source" | "archived";
 
@@ -46,13 +46,26 @@ const projects: {
   subtitle: string;
   description: string;
   tags: string[];
-  github: string;
+  github?: string;
+  link?: { href: string; label: string };
   status: Status[];
   accent: string;
   accentBorder: string;
 }[] = [
   {
     id: "01",
+    title: "Artha",
+    subtitle: "Agentic AI · Research",
+    description:
+      "A domain-ontology-driven agentic framework for LLM-based personal finance reasoning. Enriches raw bank transactions into typed ontology objects — merchants, recurring bills, anomalies, goals — then exposes them to a Claude agent through 15 typed tools. Java 21 + Spring Boot backend, Python eval harness benchmarking response accuracy across synthetic user profiles.",
+    tags: ["Java 21", "Spring Boot", "Claude API", "RAG", "PostgreSQL"],
+    github: "https://github.com/Tej-Katika/artha",
+    status: ["active", "open-source"],
+    accent: "from-primary/20 to-primary/5",
+    accentBorder: "border-primary/20",
+  },
+  {
+    id: "02",
     title: "Karmada",
     subtitle: "Open Source · CNCF",
     description:
@@ -64,7 +77,19 @@ const projects: {
     accentBorder: "border-emerald-500/20",
   },
   {
-    id: "02",
+    id: "03",
+    title: "Gr8Saver",
+    subtitle: "AI · Full-Stack · Live Product",
+    description:
+      "AI-powered deal aggregator and community. Nine scrapers across 60+ sources, DeepSeek V3 authenticity scoring to filter sponsored content, verified Amazon price-drop integration, Google Trends matching, and a natural-language agent for queries like \"best laptop under $800 with a coupon.\" Next.js 16 + Express + Postgres, real-time via SSE, auto-deployed to Railway.",
+    tags: ["Next.js 16", "TypeScript", "DeepSeek V3", "Prisma", "Railway"],
+    link: { href: "https://www.gr8saver.com", label: "gr8saver.com" },
+    status: ["deployed", "active"],
+    accent: "from-violet-500/20 to-violet-500/5",
+    accentBorder: "border-violet-500/20",
+  },
+  {
+    id: "04",
     title: "Predictive Inventory System",
     subtitle: "Cloud · ML · Full-Stack",
     description:
@@ -72,23 +97,11 @@ const projects: {
     tags: ["Python", "AWS SageMaker", "Lambda", "React", "CDK"],
     github: "https://github.com/Tej-Katika/predictive-inventory-system",
     status: ["deployed"],
-    accent: "from-primary/15 to-primary/5",
-    accentBorder: "border-primary/15",
+    accent: "from-sky-500/15 to-sky-500/5",
+    accentBorder: "border-sky-500/15",
   },
   {
-    id: "03",
-    title: "XL-Forge",
-    subtitle: "AI · Web App",
-    description:
-      "Browser-based Excel editor with AI-powered natural language transforms via Claude API. Supports .xlsx/.csv, full undo/redo, multi-sheet navigation, and WCAG 2.1 AA accessibility compliance.",
-    tags: ["React", "Vite", "Claude AI", "Vercel", "JavaScript"],
-    github: "https://github.com/Tej-Katika/xl-forge",
-    status: ["deployed", "open-source"],
-    accent: "from-violet-500/15 to-violet-500/5",
-    accentBorder: "border-violet-500/15",
-  },
-  {
-    id: "04",
+    id: "05",
     title: "JP Morgan Midas Core",
     subtitle: "FinTech · Java",
     description:
@@ -154,8 +167,11 @@ export function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: i * 0.08 }}
-            className={`snap-center shrink-0 w-[320px] md:w-[380px] gradient-border rounded-2xl bg-card flex flex-col p-6 relative overflow-hidden`}
+            className={`snap-center shrink-0 w-[320px] md:w-[400px] gradient-border rounded-2xl bg-card flex flex-col p-6 relative overflow-hidden corner-marks texture-noise`}
           >
+            {/* Crosshair corner marks */}
+            <span /><span /><span /><span />
+
             {/* Card accent gradient */}
             <div
               className={`absolute inset-0 bg-gradient-to-br ${project.accent} pointer-events-none`}
@@ -201,16 +217,32 @@ export function Projects() {
                     {project.subtitle}
                   </p>
                 </div>
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors shrink-0 ml-2"
-                  aria-label={`GitHub: ${project.title}`}
-                  onClick={(e) => isDragging && e.preventDefault()}
-                >
-                  <GithubIcon className="h-4 w-4" />
-                </a>
+                <div className="flex items-center gap-2 shrink-0 ml-2">
+                  {project.link && (
+                    <a
+                      href={project.link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-foreground transition-colors"
+                      aria-label={`Visit ${project.title}`}
+                      onClick={(e) => isDragging && e.preventDefault()}
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                  )}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-foreground transition-colors"
+                      aria-label={`GitHub: ${project.title}`}
+                      onClick={(e) => isDragging && e.preventDefault()}
+                    >
+                      <GithubIcon className="h-4 w-4" />
+                    </a>
+                  )}
+                </div>
               </div>
 
               {/* Divider */}

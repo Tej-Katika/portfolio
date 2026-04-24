@@ -10,10 +10,10 @@ const experiences = [
     period: "Sep 2024 — Present",
     location: "Dallas, TX",
     bullets: [
-      "Design and deploy cloud-native solutions leveraging AWS services including Lambda, API Gateway, S3, and SageMaker.",
-      "Build and maintain full-stack applications using Java, Spring Boot, React, and TypeScript.",
-      "Drive CI/CD pipeline automation with GitHub Actions and AWS CDK for reliable, repeatable deployments.",
-      "Collaborate cross-functionally to deliver scalable, production-grade software aligned with business requirements.",
+      "Design, develop, and validate cloud edge software modules in Java and Python — end-to-end from design and coding through unit testing, debugging, and integration into production systems.",
+      "Translate user needs and software requirements into clear interface specifications and architectural documentation, then implement modules to match.",
+      "Develop and maintain REST APIs and GraphQL interfaces with well-defined contracts; perform systematic code review and regression testing.",
+      "Triage and fix defects precisely to maintain code quality and keep delivery on schedule.",
     ],
   },
   {
@@ -22,9 +22,10 @@ const experiences = [
     period: "Oct 2022 — May 2024",
     location: "Denton, TX",
     bullets: [
-      "Supported engineering operations and technical infrastructure across campus systems.",
-      "Diagnosed and resolved hardware and software issues, maintaining high availability across facilities.",
-      "Collaborated with engineering teams to implement and test technology solutions for the university.",
+      "Designed and implemented Java and Python software modules for internal platforms, applying OOP design patterns, data structures, and algorithmic precision.",
+      "Developed REST APIs with clearly defined input/output contracts and managed PostgreSQL/MySQL schema design.",
+      "Performed regression testing and code review across the team codebase — triaging production defects using IDE debug tools and Linux diagnostics.",
+      "Used Git with structured branching and pull-request workflows to support collaborative multi-engineer development.",
     ],
   },
 ];

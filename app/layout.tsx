@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -13,13 +13,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
-  title: "Tejashwar Reddy Katika — Full-Stack Software AI Engineer",
+  title: "Tejashwar Reddy Katika — AI & Systems Engineer",
   description:
-    "Portfolio of Tejashwar Reddy Katika — Full-Stack Software AI Engineer based in Dallas, TX. Building intelligent, scalable systems.",
+    "Portfolio of Tejashwar Reddy Katika — building agentic systems, cloud-native orchestration, and the interfaces between them. Dallas, TX.",
   openGraph: {
-    title: "Tejashwar Reddy Katika",
-    description: "Full-Stack Software AI Engineer based in Dallas, TX.",
+    title: "Tejashwar Reddy Katika — AI & Systems Engineer",
+    description: "Building agentic systems, cloud-native orchestration, and the interfaces between them.",
     type: "website",
   },
 };
@@ -31,7 +38,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
     >
       <body className="antialiased">
         <ThemeProvider

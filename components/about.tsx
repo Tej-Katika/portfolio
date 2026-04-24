@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 const stats = [
   { label: "Current Role", value: "Software Engineer", sub: "Automate IT Inc" },
   { label: "Education", value: "MS Computer Science", sub: "Univ. of North Texas" },
-  { label: "Location", value: "Dallas, TX", sub: "Open to remote" },
-  { label: "Certification", value: "AWS Solutions Architect", sub: "Associate · Active" },
+  { label: "Live Product", value: "Gr8Saver", sub: "gr8saver.com" },
+  { label: "Research", value: "Artha — arXiv", sub: "agentic finance AI" },
 ];
 
 export function About() {
@@ -22,28 +22,42 @@ export function About() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-4xl md:text-6xl font-black tracking-tight leading-[1.05] mb-10 max-w-4xl"
+        className="text-4xl md:text-6xl font-black tracking-tight leading-[1.02] mb-10 max-w-4xl"
       >
-        Building systems that{" "}
-        <span className="gradient-text">think, scale,</span>
-        <br className="hidden md:block" />
-        {" "}and adapt.
+        I build systems that{" "}
+        <span className="font-serif-display italic text-primary/90 font-normal">
+          reason
+        </span>
+        ,{" "}
+        <span className="gradient-text">scale,</span>
+        {" "}and{" "}
+        <span className="font-serif-display italic text-primary/90 font-normal">
+          adapt
+        </span>
+        .
       </motion.h2>
 
       <div className="grid md:grid-cols-5 gap-12 items-start mb-16">
         <div className="md:col-span-3">
           <p className="text-muted-foreground leading-relaxed mb-4 text-base md:text-lg">
-            I&apos;m Tejashwar — a full-stack software and AI engineer based in
-            Dallas, TX. I specialize in designing cloud-native architectures and
-            integrating machine learning into production systems that solve real
-            problems.
+            I&apos;m Tejashwar — a software engineer working at the intersection of{" "}
+            <span className="text-foreground/90">agentic AI</span>,{" "}
+            <span className="text-foreground/90">cloud-native orchestration</span>, and
+            the interfaces that make them usable.
+          </p>
+          <p className="text-muted-foreground leading-relaxed mb-4 text-base">
+            Right now I&apos;m researching <span className="text-foreground/90 font-medium">Artha</span> — a
+            domain-ontology-driven agentic framework where a Claude agent reasons over
+            typed financial objects instead of raw SQL rows. I&apos;m also shipping{" "}
+            <span className="text-foreground/90 font-medium">Gr8Saver</span>, a live
+            AI deal aggregator with nine scrapers, DeepSeek V3 authenticity scoring,
+            and a natural-language search agent — deployed and serving real traffic.
           </p>
           <p className="text-muted-foreground leading-relaxed text-base">
-            With a Master&apos;s in Computer Science from the University of North
-            Texas and hands-on experience spanning Java, Python, React, and AWS,
-            I bridge the gap between intelligent back-end systems and
-            polished user experiences. Currently contributing to Karmada — a
-            CNCF multi-cloud Kubernetes orchestration project.
+            In parallel, I contribute to <span className="text-foreground/90 font-medium">Karmada</span> —
+            the CNCF multi-cloud Kubernetes orchestrator — because the
+            infrastructure problem of the next decade is running AI workloads across
+            cloud boundaries, and that&apos;s where I want to be useful.
           </p>
         </div>
 
@@ -72,10 +86,10 @@ export function About() {
       {/* Stat counters */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-0 border border-border rounded-2xl overflow-hidden">
         {[
-          { value: 2, suffix: "+", label: "Years Experience" },
-          { value: 4, suffix: "+", label: "Projects Shipped" },
-          { value: 10, suffix: "+", label: "AWS Services Used" },
-          { value: 1, suffix: "", label: "CNCF Contribution" },
+          { value: 5, suffix: "+", label: "Projects Shipped" },
+          { value: 15, suffix: "", label: "Agent Tools · Artha" },
+          { value: 60, suffix: "+", label: "Sources · Gr8Saver" },
+          { value: 1, suffix: "", label: "CNCF Contributor" },
         ].map((s, i) => (
           <div
             key={s.label}

@@ -12,6 +12,29 @@ type Row = {
 
 const matrix: { group: string; rows: Row[] }[] = [
   {
+    group: "Intelligence",
+    rows: [
+      {
+        domain: "Agentic AI Systems",
+        stack: ["Claude API", "tool-use", "agent loops", "ontology layers"],
+        years: 2,
+        note: "Artha's 15 typed tools, eval harness",
+      },
+      {
+        domain: "LLM Integration",
+        stack: ["RAG", "vector DBs", "prompt engineering", "chain-of-thought"],
+        years: 2,
+        note: "few-shot, structured output",
+      },
+      {
+        domain: "ML Engineering",
+        stack: ["SageMaker", "scikit-learn", "Pandas", "forecasting"],
+        years: 3,
+        note: "from pipeline to inference",
+      },
+    ],
+  },
+  {
     group: "Systems",
     rows: [
       {
@@ -22,49 +45,38 @@ const matrix: { group: string; rows: Row[] }[] = [
       },
       {
         domain: "Cloud Architecture",
-        stack: ["AWS", "Lambda", "CDK", "API Gateway"],
+        stack: ["AWS", "Lambda", "CDK", "Terraform"],
         years: 4,
-        note: "AWS SA · Associate",
+        note: "AWS SAA · CCP · active",
       },
       {
         domain: "Backend Engineering",
-        stack: ["Spring Boot", "Node.js", "REST", "Serverless"],
+        stack: ["Java 21", "Spring Boot", "Node.js", "REST", "GraphQL"],
         years: 4,
         note: "contract-first services",
       },
-    ],
-  },
-  {
-    group: "Intelligence",
-    rows: [
-      {
-        domain: "AI / ML Engineering",
-        stack: ["SageMaker", "Claude API", "scikit-learn", "Pandas"],
-        years: 3,
-        note: "forecasting, agents, pipelines",
-      },
       {
         domain: "Data Platforms",
-        stack: ["Glue", "Step Functions", "S3", "SQL"],
+        stack: ["PostgreSQL", "Prisma", "Redis", "DynamoDB", "Glue"],
         years: 3,
-        note: "ingest → transform → infer",
+        note: "relational · cache · NoSQL",
       },
     ],
   },
   {
-    group: "Interface",
+    group: "Interface & Delivery",
     rows: [
       {
         domain: "Frontend",
-        stack: ["React", "Next.js", "TypeScript", "Tailwind"],
+        stack: ["React", "Next.js 16", "TypeScript", "Tailwind", "Motion"],
         years: 4,
-        note: "app-router, motion, a11y",
+        note: "app-router, a11y, motion",
       },
       {
-        domain: "DX & Delivery",
-        stack: ["Docker", "GitHub Actions", "Vercel", "CI/CD"],
+        domain: "DevOps & Observability",
+        stack: ["Docker", "GitHub Actions", "Prometheus", "Grafana"],
         years: 4,
-        note: "ship fast, ship safe",
+        note: "ship fast, watch closely",
       },
     ],
   },
@@ -92,7 +104,7 @@ export function Skills() {
 
       <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
         <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-[1]">
-          The <span className="gradient-text">stack</span>, without the buzzwords.
+          The <span className="font-serif-display italic text-primary/90">stack</span>, without the buzzwords.
         </h2>
         <p className="text-xs font-mono text-muted-foreground max-w-xs">
           Depth marked with dots · hover a row for context.
@@ -168,7 +180,7 @@ export function Skills() {
 
       {/* Footnote */}
       <p className="mt-8 font-mono text-[10px] text-muted-foreground/60 uppercase tracking-[0.2em]">
-        ★ AWS Certified Solutions Architect — Associate · active CNCF contributor
+        ★ AWS Solutions Architect · AWS Cloud Practitioner · active CNCF contributor
       </p>
     </SectionWrapper>
   );
